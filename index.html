@@ -6,33 +6,32 @@
 <title>Redirect</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
-
 <body style="margin:0;height:100vh;display:flex;align-items:center;justify-content:center;background:#111;color:#fff;font-family:sans-serif;">
 <div>Переход...</div>
 
 <script>
-
 Telegram.WebApp.ready();
 
 const VALID_KEY = "go";
-const BOT_LINK = "https://t.me/menstachbot";
+const BOT_LINK = "https://t.me/menstachbot?start=go";
 
 const startParam = Telegram.WebApp.initDataUnsafe.start_param || "";
 
 if (startParam === VALID_KEY) {
+    setTimeout(() => {
+        try {
+            Telegram.WebApp.openTelegramLink(BOT_LINK);
+        } catch (e) {
+            window.location.href = BOT_LINK;
+        }
+    }, 700);
 
     setTimeout(() => {
-
-        Telegram.WebApp.openTelegramLink(BOT_LINK);
-
-        setTimeout(() => {
+        try {
             Telegram.WebApp.close();
-        }, 600);
-
-    }, 800);
-
+        } catch (e) {}
+    }, 1800);
 }
-
 </script>
 
 </body>
