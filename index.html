@@ -6,24 +6,30 @@
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <title>Redirect</title>
 </head>
-<body style="margin:0;display:flex;align-items:center;justify-content:center;height:100vh;font-family:Arial,sans-serif;background:#111;color:#fff;">
+<body style="margin:0;display:flex;align-items:center;justify-content:center;height:100vh;background:#111;color:#fff;font-family:Arial,sans-serif;">
 <div>Переход...</div>
 
 <script>
-const target = "https://t.me/menstachbot?start=app";
+const targetTme = "https://t.me/menstachbot?start=app";
+const targetTg  = "tg://resolve?domain=menstachbot&start=app";
 
 try {
   if (window.Telegram && Telegram.WebApp) {
     Telegram.WebApp.ready();
-    Telegram.WebApp.openTelegramLink(target);
   }
 } catch (e) {}
 
-// запасной вариант
-setTimeout(function(){
-  window.location.href = target;
-}, 400);
-</script>
+setTimeout(() => {
+  try {
+    window.location.href = targetTg;
+  } catch (e) {}
+}, 150);
 
+setTimeout(() => {
+  try {
+    window.location.href = targetTme;
+  } catch (e) {}
+}, 700);
+</script>
 </body>
 </html>
