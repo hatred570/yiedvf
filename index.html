@@ -1,35 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <title>Redirect</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
-<body style="margin:0;display:flex;align-items:center;justify-content:center;height:100vh;background:#111;color:#fff;font-family:Arial,sans-serif;">
+
+<body style="margin:0;height:100vh;display:flex;align-items:center;justify-content:center;background:#111;color:#fff;font-family:sans-serif;">
 <div>Переход...</div>
 
 <script>
-const targetTme = "https://t.me/menstachbot?start=app";
-const targetTg  = "tg://resolve?domain=menstachbot&start=app";
 
-try {
-  if (window.Telegram && Telegram.WebApp) {
-    Telegram.WebApp.ready();
-  }
-} catch (e) {}
+Telegram.WebApp.ready();
 
-setTimeout(() => {
-  try {
-    window.location.href = targetTg;
-  } catch (e) {}
-}, 150);
+const VALID_KEY = "go";
+const BOT_LINK = "https://t.me/menstachbot";
 
-setTimeout(() => {
-  try {
-    window.location.href = targetTme;
-  } catch (e) {}
-}, 700);
+const startParam = Telegram.WebApp.initDataUnsafe.start_param || "";
+
+if (startParam === VALID_KEY) {
+
+    setTimeout(() => {
+
+        Telegram.WebApp.openTelegramLink(BOT_LINK);
+
+        setTimeout(() => {
+            Telegram.WebApp.close();
+        }, 600);
+
+    }, 800);
+
+}
+
 </script>
+
 </body>
 </html>
