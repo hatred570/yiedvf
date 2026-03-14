@@ -10,18 +10,20 @@
 <div>Переход...</div>
 
 <script>
-Telegram.WebApp.ready();
+const target = "https://t.me/menstachbot?start=app";
 
-const bot = "menstachbot";
-const link = "https://t.me/" + bot + "?start=app";
-
-setTimeout(() => {
-  try {
-    Telegram.WebApp.openTelegramLink(link);
-  } catch (e) {
-    window.location.href = link;
+try {
+  if (window.Telegram && Telegram.WebApp) {
+    Telegram.WebApp.ready();
+    Telegram.WebApp.openTelegramLink(target);
   }
-}, 300);
+} catch (e) {}
+
+// запасной вариант
+setTimeout(function(){
+  window.location.href = target;
+}, 400);
 </script>
+
 </body>
 </html>
